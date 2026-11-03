@@ -42,15 +42,25 @@ export default function Crops() {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>My Crop Records</h2>
-        <button className="btn btn-success" onClick={() => setShow(true)}><i className="bi bi-plus-lg"></i> Add Crop</button>
+      <section className="page-heading-row mb-4">
+        <div>
+          <span className="section-kicker">YOUR FIELDS, ORGANIZED</span>
+          <h1>My crop records</h1>
+          <p>Keep your crop, soil and irrigation details together in one place.</p>
+        </div>
+        <button className="btn btn-success" onClick={() => setShow(true)}><i className="bi bi-plus-lg me-2"></i>Add crop</button>
+      </section>
+
+      <div className="crop-overview mb-3">
+        <div className="crop-overview-icon"><i className="bi bi-flower1"></i></div>
+        <div><strong>{crops.length}</strong><span>{crops.length === 1 ? ' crop record' : ' crop records'}</span></div>
+        <span className="crop-overview-note">Farm records at a glance</span>
       </div>
 
       {crops.length ? (
-        <div className="table-responsive card border-0 shadow-sm">
+        <div className="table-responsive card crop-table-card">
           <table className="table table-hover mb-0">
-            <thead className="table-success">
+            <thead>
               <tr>
                 <th>Crop</th><th>Season</th><th>Soil</th><th>Area</th><th>N-P-K</th><th>pH</th><th>Irrigation</th><th></th>
               </tr>
@@ -58,15 +68,15 @@ export default function Crops() {
             <tbody>
               {crops.map(c => (
                 <tr key={c.id}>
-                  <td><strong>{c.crop_name}</strong></td>
-                  <td>{c.season || '—'}</td>
+                  <td><span className="crop-table-icon"><i className="bi bi-flower1"></i></span><strong>{c.crop_name}</strong></td>
+                  <td><span className="season-tag">{c.season || '—'}</span></td>
                   <td>{c.soil_type || '—'}</td>
                   <td>{c.area_ha} ha</td>
                   <td>{c.nitrogen || '—'} - {c.phosphorus || '—'} - {c.potassium || '—'}</td>
                   <td>{c.soil_ph || '—'}</td>
                   <td>{c.irrigation_type || '—'}</td>
                   <td>
-                    <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(c.id)}>
+                    <button className="btn btn-sm btn-outline-danger crop-delete-button" onClick={() => handleDelete(c.id)} aria-label={`Delete ${c.crop_name} record`}>
                       <i className="bi bi-trash"></i>
                     </button>
                   </td>
@@ -76,7 +86,12 @@ export default function Crops() {
           </table>
         </div>
       ) : (
-        <div className="alert alert-info">No crop records yet. Click <strong>Add Crop</strong>.</div>
+        <div className="crop-empty">
+          <span className="history-empty-icon"><i className="bi bi-flower1"></i></span>
+          <h2>Start your crop journal</h2>
+          <p>Add a crop record to keep its season, soil, nutrients and irrigation details together.</p>
+          <button className="btn btn-success" onClick={() => setShow(true)}><i className="bi bi-plus-lg me-2"></i>Add your first crop</button>
+        </div>
       )}
 
       {show && (

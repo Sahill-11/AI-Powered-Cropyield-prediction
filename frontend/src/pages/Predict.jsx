@@ -58,16 +58,27 @@ export default function Predict() {
 
   return (
     <>
-      <h2 className="mb-4"><i className="bi bi-graph-up-arrow text-success"></i> Crop Yield Prediction & Optimization</h2>
+      <section className="page-heading-row mb-4">
+        <div>
+          <span className="section-kicker">PLAN WITH BETTER INSIGHT</span>
+          <h1>Crop yield prediction</h1>
+          <p>Enter your crop, soil and weather details to explore a yield estimate.</p>
+        </div>
+        <div className="predict-heading-icon"><i className="bi bi-graph-up-arrow"></i></div>
+      </section>
       {error && <div className="alert alert-danger">{error}</div>}
 
       <div className="row g-4">
         <div className="col-lg-5">
-          <div className="card border-0 shadow-sm">
-            <div className="card-header bg-success text-white"><strong>Input Parameters</strong></div>
+          <div className="card predict-form-card">
+            <div className="card-header predict-card-heading">
+              <span className="predict-heading-icon small"><i className="bi bi-sliders"></i></span>
+              <div><strong>Farm conditions</strong><small>Tell us about this growing season</small></div>
+            </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <div className="row g-3">
+                  <div className="col-12"><div className="form-section-label"><span>01</span> Crop & location</div></div>
                   <div className="col-md-6">
                     <label className="form-label">Crop *</label>
                     <select name="crop" className="form-select" value={form.crop} onChange={handleChange}>
@@ -93,7 +104,7 @@ export default function Predict() {
                     </select>
                   </div>
 
-                  <div className="col-12"><hr className="my-1" /><small className="text-muted">Weather & Climate</small></div>
+                  <div className="col-12"><div className="form-section-label"><span>02</span> Weather & climate</div></div>
                   <div className="col-md-4">
                     <label className="form-label">Temp (°C)</label>
                     <input type="number" name="temperature" className="form-control" step="0.1" value={form.temperature} onChange={handleChange} required />
@@ -107,7 +118,7 @@ export default function Predict() {
                     <input type="number" name="humidity" className="form-control" value={form.humidity} onChange={handleChange} />
                   </div>
 
-                  <div className="col-12"><hr className="my-1" /><small className="text-muted">Soil Nutrients</small></div>
+                  <div className="col-12"><div className="form-section-label"><span>03</span> Soil nutrients</div></div>
                   <div className="col-md-3">
                     <label className="form-label">pH</label>
                     <input type="number" name="soil_ph" className="form-control" step="0.1" value={form.soil_ph} onChange={handleChange} />
@@ -125,7 +136,7 @@ export default function Predict() {
                     <input type="number" name="potassium" className="form-control" value={form.potassium} onChange={handleChange} />
                   </div>
 
-                  <div className="col-12"><hr className="my-1" /><small className="text-muted">Inputs & Area</small></div>
+                  <div className="col-12"><div className="form-section-label"><span>04</span> Farm inputs</div></div>
                   <div className="col-md-4">
                     <label className="form-label">Fertilizer kg/ha</label>
                     <input type="number" name="fertilizer_kg_ha" className="form-control" value={form.fertilizer_kg_ha} onChange={handleChange} />
@@ -154,16 +165,18 @@ export default function Predict() {
           {result ? (
             <>
               <div className="card border-0 shadow-sm mb-4 result-card">
+                <div className="result-card-image" role="img" aria-label="Healthy green crops in a field"></div>
                 <div className="card-body text-center p-4">
-                  <h5 className="text-muted">Predicted Yield</h5>
-                  <h1 className="display-4 fw-bold text-success">{result.predicted_yield} <small className="fs-5">tons/ha</small></h1>
-                  <p className="mb-0">Total estimated production for {form.area_ha} ha: <strong>{result.total_production} tons</strong></p>
-                  <p className="small text-muted mt-2 mb-0">{form.crop} · {form.season} · {form.state}</p>
+                  <span className="result-label"><i className="bi bi-stars me-2"></i>YOUR YIELD OUTLOOK</span>
+                  <h1 className="display-4 fw-bold text-success mt-2">{result.predicted_yield} <small className="fs-5">tons/ha</small></h1>
+                  <p className="mb-3">Estimated production across <strong>{form.area_ha} ha</strong>: <strong>{result.total_production} tons</strong></p>
+                  <div className="result-context"><span>{form.crop}</span><span>{form.season}</span><span>{form.state}</span></div>
                 </div>
               </div>
               <div className="card border-0 shadow-sm">
-                <div className="card-header bg-warning-subtle">
-                  <strong><i className="bi bi-lightbulb"></i> Optimization Recommendations</strong>
+                <div className="card-header recommendations-heading">
+                  <span className="recommendation-icon"><i className="bi bi-lightbulb"></i></span>
+                  <div><strong>Recommendations</strong><small>Ideas to help optimize your growing conditions</small></div>
                 </div>
                 <div className="card-body">
                   <ul className="list-group list-group-flush">
@@ -173,10 +186,12 @@ export default function Predict() {
               </div>
             </>
           ) : (
-            <div className="card border-0 shadow-sm h-100 d-flex align-items-center justify-content-center bg-light">
-              <div className="text-center p-5 text-muted">
-                <i className="bi bi-bar-chart-line fs-1"></i>
-                <p className="mt-3 mb-0">Fill the form and click Predict to see AI yield forecast and optimization tips.</p>
+            <div className="card predict-placeholder h-100 d-flex align-items-center justify-content-center">
+              <div className="predict-placeholder-image" role="img" aria-label="Sunlit farmland"></div>
+              <div className="text-center p-4 p-md-5">
+                <span className="history-empty-icon"><i className="bi bi-bar-chart-line"></i></span>
+                <h2>Your forecast will appear here</h2>
+                <p>Complete the farm conditions and run a prediction to see your estimated yield and recommendations.</p>
               </div>
             </div>
           )}

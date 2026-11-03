@@ -11,6 +11,18 @@
       "village": "kelod",
       "farm_size_ha": 1.9,
       "created_at": "2026-11-03T14:49:13.463Z"
+    },
+    {
+      "id": "5b1658ff-9cef-4397-9c0d-0bd708cd8e2a",
+      "name": "Anurag",
+      "email": "anurag@gmail.com",
+      "phone": "8319038102",
+      "password": "$2a$10$sNCxfUDu93HCVPui1ooI2eWg94qE.ulwcYxEC8fYEIjtHbqWpZ9/y",
+      "state": "Madhya Pradesh",
+      "district": "dewas",
+      "village": "kelod",
+      "farm_size_ha": 1,
+      "created_at": "2026-11-03T15:45:55.466Z"
     }
   ],
   "crops": [
@@ -109,6 +121,111 @@
         "📊 Expected yield: ~3.53 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
       ],
       "created_at": "2026-11-03T15:01:23.491Z"
+    },
+    {
+      "id": "9cc2f039-65df-44b4-8da5-f9d1cceb4c6e",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop": "Rice",
+      "state": "Madhya Pradesh",
+      "season": "Kharif",
+      "soil_type": "Loamy",
+      "temperature": 28,
+      "rainfall": 800,
+      "humidity": 65,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "predicted_yield": 3.53,
+      "total_production": 3.53,
+      "optimization_tips": [
+        "✅ Current conditions look good for the selected crop. Follow recommended package of practices.",
+        "📊 Expected yield: ~3.53 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-03T15:42:10.059Z"
+    },
+    {
+      "id": "512c7135-8ef3-443c-9bb6-c82907722292",
+      "user_id": "5b1658ff-9cef-4397-9c0d-0bd708cd8e2a",
+      "crop": "Rice",
+      "state": "Madhya Pradesh",
+      "season": "Kharif",
+      "soil_type": "Loamy",
+      "temperature": 28,
+      "rainfall": 800,
+      "humidity": 65,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "predicted_yield": 3.53,
+      "total_production": 3.53,
+      "optimization_tips": [
+        "✅ Current conditions look good for the selected crop. Follow recommended package of practices.",
+        "📊 Expected yield: ~3.53 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-03T15:46:09.557Z"
+    },
+    {
+      "id": "0e2cc720-3e4a-49b7-ac51-71fc1ad508d0",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop": "Rice",
+      "state": "Madhya Pradesh",
+      "season": "Kharif",
+      "soil_type": "Loamy",
+      "temperature": 28,
+      "rainfall": 800,
+      "humidity": 65,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "predicted_yield": 3.53,
+      "total_production": 3.53,
+      "optimization_tips": [
+        "✅ Current conditions look good for the selected crop. Follow recommended package of practices.",
+        "📊 Expected yield: ~3.53 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-03T16:20:59.541Z"
+    },
+    {
+      "id": "5f84b598-7658-4065-817e-e3d286617265",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop": "Wheat",
+      "state": "Madhya Pradesh",
+      "season": "Kharif",
+      "soil_type": "Black",
+      "temperature": 28,
+      "rainfall": 800,
+      "humidity": 65,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "predicted_yield": 2.56,
+      "total_production": 2.56,
+      "optimization_tips": [
+        "🌡️ Temperature (28°C) is high. Ensure irrigation + mulching to reduce heat stress.",
+        "🌿 Nitrogen low (80 kg/ha). Apply urea/DAP to reach 100–150 kg/ha.",
+        "📊 Expected yield: ~2.56 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-03T16:21:37.525Z"
     }
   ]
 }

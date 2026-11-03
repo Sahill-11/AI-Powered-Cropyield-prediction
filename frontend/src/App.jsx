@@ -20,7 +20,7 @@ function AppRoutes() {
   return (
     <>
       <Navbar />
-      <main className="container my-4">
+      <main className="container app-content my-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -32,10 +32,10 @@ function AppRoutes() {
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         </Routes>
       </main>
-      <footer className="bg-dark text-light py-4 mt-5">
+      <footer className="app-footer py-4 mt-5">
         <div className="container text-center">
-          <p className="mb-1">🌾 AI-Powered Crop Yield Prediction & Optimization</p>
-          <small className="text-muted">React + Node.js · College Major Project</small>
+          <p className="mb-1"><i className="bi bi-flower1 me-2"></i>CropYield AI</p>
+          <small>Smarter insights for every growing season</small>
         </div>
       </footer>
     </>
