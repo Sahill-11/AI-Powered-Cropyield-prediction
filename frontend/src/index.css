@@ -1,0 +1,53 @@
+body {
+  background-color: #f5f7f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.hero {
+  background: linear-gradient(135deg, #146c43 0%, #198754 50%, #20c997 100%);
+  padding: 3.5rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1.2rem rgba(0,0,0,0.1) !important;
+}
+
+.result-card {
+  background: linear-gradient(180deg, #e8f5e9 0%, #ffffff 100%);
+  border: 2px solid #198754 !important;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.navbar-brand {
+  letter-spacing: 0.5px;
+}

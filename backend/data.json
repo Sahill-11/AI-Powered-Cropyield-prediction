@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "name": "Sahil Choudhary",
+      "email": "sahilchoudhary11085@gmail.com",
+      "phone": "7415421108",
+      "password": "$2a$10$.YY9kjLQqJBGQR4lel1A4uOs247r/kRaZZ85ksaGOwAkbdZw6RkD.",
+      "state": "Madhya Pradesh",
+      "district": "Dewas",
+      "village": "kelod",
+      "farm_size_ha": 1.9,
+      "created_at": "2026-11-03T14:49:13.463Z"
+    }
+  ],
+  "crops": [
+    {
+      "id": "138c303f-472e-4d2f-a26c-ada913595bc1",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop_name": "Wheat",
+      "season": "Rabi",
+      "soil_type": "Sandy",
+      "area_ha": 1.4,
+      "nitrogen": 1,
+      "phosphorus": 2,
+      "potassium": 2,
+      "soil_ph": -0.5,
+      "irrigation_type": "Tube-well",
+      "fertilizer_used_kg": 6,
+      "notes": "",
+      "created_at": "2026-11-03T14:50:28.324Z"
+    }
+  ],
+  "predictions": [
+    {
+      "id": "637c63d9-68b4-4676-b50e-b6ae5032e515",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop": "Rice",
+      "state": "Madhya Pradesh",
+      "season": "Kharif",
+      "soil_type": "Loamy",
+      "temperature": 28,
+      "rainfall": 800,
+      "humidity": 65,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "predicted_yield": 3.53,
+      "total_production": 3.53,
+      "optimization_tips": [
+        "✅ Current conditions look good for the selected crop. Follow recommended package of practices.",
+        "📊 Expected yield: ~3.53 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-03T14:50:43.693Z"
+    },
+    {
+      "id": "0b329992-097d-4118-868d-66ebd5b4ed64",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop": "Soybean",
+      "state": "Punjab",
+      "season": "Kharif",
+      "soil_type": "Loamy",
+      "temperature": 28,
+      "rainfall": 800,
+      "humidity": 65,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "predicted_yield": 1.41,
+      "total_production": 1.41,
+      "optimization_tips": [
+        "✅ Current conditions look good for the selected crop. Follow recommended package of practices.",
+        "📊 Expected yield: ~1.41 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-03T14:52:42.548Z"
+    },
+    {
+      "id": "ef60a3fc-e245-4cd3-a207-1db8409d5da8",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop": "Rice",
+      "state": "Madhya Pradesh",
+      "season": "Kharif",
+      "soil_type": "Loamy",
+      "temperature": 28,
+      "rainfall": 800,
+      "humidity": 65,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "predicted_yield": 3.53,
+      "total_production": 3.53,
+      "optimization_tips": [
+        "✅ Current conditions look good for the selected crop. Follow recommended package of practices.",
+        "📊 Expected yield: ~3.53 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-03T15:01:23.491Z"
+    }
+  ]
+}
