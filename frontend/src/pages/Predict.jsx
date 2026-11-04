@@ -16,6 +16,10 @@ export default function Predict() {
     nitrogen: 80, phosphorus: 40, potassium: 40, fertilizer_kg_ha: 100,
     irrigation: 1, area_ha: 1, days_to_harvest: 120
   })
+  const [location, setLocation] = useState(user?.district || user?.state || 'Punjab')
+  const [weather, setWeather] = useState(null)
+  const [weatherLoading, setWeatherLoading] = useState(false)
+  const [weatherError, setWeatherError] = useState('')
   const [result, setResult] = useState(null)
   const [tips, setTips] = useState([])
   const [loading, setLoading] = useState(false)
@@ -24,6 +28,25 @@ export default function Predict() {
   const handleChange = e => {
     const { name, value } = e.target
     setForm(prev => ({ ...prev, [name]: value }))
+  }
+
+  const fetchWeather = async () => {
+    setWeatherError('')
+    setWeatherLoading(true)
+    try {
+      const res = await api.get('/weather', { params: { location } })
+      setWeather(res.data)
+      setForm(prev => ({
+        ...prev,
+        temperature: res.data.temperature,
+        humidity: res.data.humidity,
+        soil_moisture: res.data.soil_moisture_percent
+      }))
+    } catch (err) {
+      setWeatherError(err.response?.data?.error || 'Could not fetch live weather')
+    } finally {
+      setWeatherLoading(false)
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -44,7 +67,15 @@ export default function Predict() {
         fertilizer_kg_ha: Number(form.fertilizer_kg_ha),
         irrigation: Number(form.irrigation),
         area_ha: Number(form.area_ha),
-        days_to_harvest: Number(form.days_to_harvest)
+        days_to_harvest: Number(form.days_to_harvest),
+        ...(weather ? {
+          weather_location: weather.location,
+          weather_observed_at: weather.observed_at,
+          soil_moisture_source: weather.soil_moisture_source
+        } : {}),
+        ...(form.soil_moisture !== undefined && form.soil_moisture !== ''
+          ? { soil_moisture: Number(form.soil_moisture) }
+          : {})
       }
       const res = await api.post('/predict', payload)
       setResult(res.data)
@@ -91,6 +122,24 @@ export default function Predict() {
                       {STATES.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
+                  <div className="col-12">
+                    <label className="form-label">City / district for live weather</label>
+                    <div className="input-group">
+                      <input className="form-control" value={location} onChange={e => {
+                        setLocation(e.target.value)
+                        setWeather(null)
+                      }}
+                        placeholder="e.g. Ludhiana" aria-label="City or district for live weather" />
+                      <button type="button" className="btn btn-outline-success" onClick={fetchWeather}
+                        disabled={weatherLoading || !location.trim()}>
+                        {weatherLoading ? 'Fetching...' : <><i className="bi bi-cloud-sun"></i> Fetch live weather</>}
+                      </button>
+                    </div>
+                    {weatherError && <div className="text-danger small mt-2">{weatherError}</div>}
+                    {weather && <div className="text-success small mt-2">
+                      Live data for {weather.location} · updated {weather.observed_at} · next 7 days: {weather.rainfall_next_7_days_mm.toFixed(1)} mm rain
+                    </div>}
+                  </div>
                   <div className="col-md-6">
                     <label className="form-label">Season</label>
                     <select name="season" className="form-select" value={form.season} onChange={handleChange}>
@@ -116,6 +165,15 @@ export default function Predict() {
                   <div className="col-md-4">
                     <label className="form-label">Humidity (%)</label>
                     <input type="number" name="humidity" className="form-control" value={form.humidity} onChange={handleChange} />
+                  </div>
+                  <div className="col-md-4">
+                    <label className="form-label">Soil moisture (%)</label>
+                    <input type="number" name="soil_moisture" className="form-control" min="0" max="100"
+                      step="0.1" value={form.soil_moisture || ''} onChange={handleChange} />
+                    <div className="form-text">Model estimate for top 1 cm; verify in the field.</div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-text">Season rainfall (mm) below is still entered manually; the API shows only the next 7-day forecast.</div>
                   </div>
 
                   <div className="col-12"><div className="form-section-label"><span>03</span> Soil nutrients</div></div>

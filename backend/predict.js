@@ -40,6 +40,10 @@ function predictYield(input) {
   const fert = Number(input.fertilizer_kg_ha) || 100;
   const irrigation = Number(input.irrigation) ? 1 : 0;
   const area = Number(input.area_ha) || 1;
+  const soilMoisture = Number(input.soil_moisture);
+  const hasSoilMoisture = input.soil_moisture !== undefined &&
+    input.soil_moisture !== null && input.soil_moisture !== '' &&
+    Number.isFinite(soilMoisture);
 
   const tScore = scoreRange(temp, params.temp[0], params.temp[1], 8);
   const rScore = scoreRange(rain, params.rain[0], params.rain[1], 400);
@@ -65,6 +69,10 @@ function predictYield(input) {
   // Normalize around 1.0
   const normalized = factor / 0.85;
   let yieldT = params.base * normalized * humScore;
+  if (hasSoilMoisture) {
+    if (soilMoisture < 10) yieldT *= 0.85;
+    else if (soilMoisture > 45) yieldT *= 0.9;
+  }
 
   // Small random-like variation based on inputs hash (deterministic)
   const seed = (temp * 7 + rain * 3 + n * 11 + ph * 13) % 100;
@@ -92,6 +100,10 @@ function generateOptimization(input, predictedYield) {
   const k = Number(input.potassium) || 40;
   const fert = Number(input.fertilizer_kg_ha) || 100;
   const irrigation = Number(input.irrigation) ? 1 : 0;
+  const soilMoisture = Number(input.soil_moisture);
+  const hasSoilMoisture = input.soil_moisture !== undefined &&
+    input.soil_moisture !== null && input.soil_moisture !== '' &&
+    Number.isFinite(soilMoisture);
 
   if (temp < params.temp[0]) {
     tips.push(`🌡️ Temperature (${temp}°C) is low for ${crop}. Prefer sowing in ${params.temp[0]}–${params.temp[1]}°C window or use early varieties.`);
@@ -107,6 +119,12 @@ function generateOptimization(input, predictedYield) {
 
   if (!irrigation && rain < 650) {
     tips.push('🚿 Strongly recommended: Adopt drip or sprinkler irrigation (expected 15–25% yield gain).');
+  }
+
+  if (hasSoilMoisture && soilMoisture < 10) {
+    tips.push(`💧 Model-estimated topsoil moisture is low (${soilMoisture}%). Check field moisture and consider irrigation.`);
+  } else if (hasSoilMoisture && soilMoisture > 45) {
+    tips.push(`💧 Model-estimated topsoil moisture is high (${soilMoisture}%). Check field conditions and drainage.`);
   }
 
   if (ph < params.ph[0]) {
