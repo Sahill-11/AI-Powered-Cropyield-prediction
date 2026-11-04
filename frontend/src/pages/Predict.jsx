@@ -34,16 +34,58 @@ export default function Predict() {
     setWeatherError('')
     setWeatherLoading(true)
     try {
-      const res = await api.get('/weather', { params: { location } })
-      setWeather(res.data)
+      const geocodingUrl = new URL('https://geocoding-api.open-meteo.com/v1/search')
+      geocodingUrl.search = new URLSearchParams({
+        name: location.trim(),
+        count: '1',
+        language: 'en',
+        format: 'json',
+        countryCode: 'IN'
+      })
+      const geocodingResponse = await fetch(geocodingUrl)
+      if (!geocodingResponse.ok) throw new Error('Location lookup is temporarily unavailable.')
+      const geocoding = await geocodingResponse.json()
+      const place = geocoding.results?.[0]
+      if (!place) throw new Error(`No Indian location found for "${location.trim()}".`)
+
+      const forecastUrl = new URL('https://api.open-meteo.com/v1/forecast')
+      forecastUrl.search = new URLSearchParams({
+        latitude: String(place.latitude),
+        longitude: String(place.longitude),
+        current: 'temperature_2m,relative_humidity_2m,precipitation,soil_moisture_0_to_1cm',
+        daily: 'precipitation_sum',
+        forecast_days: '7',
+        timezone: 'auto'
+      })
+      const forecastResponse = await fetch(forecastUrl)
+      if (!forecastResponse.ok) throw new Error('Weather provider is temporarily unavailable.')
+      const forecast = await forecastResponse.json()
+      const current = forecast.current
+      const moisture = current?.soil_moisture_0_to_1cm
+      if (!current || !Number.isFinite(current.temperature_2m) ||
+          !Number.isFinite(current.relative_humidity_2m) || !Number.isFinite(moisture)) {
+        throw new Error('Weather provider returned incomplete conditions for this location.')
+      }
+
+      const weatherData = {
+        location: [place.name, place.admin1].filter(Boolean).join(', '),
+        observed_at: current.time,
+        temperature: current.temperature_2m,
+        humidity: current.relative_humidity_2m,
+        soil_moisture_percent: Math.round(moisture * 1000) / 10,
+        soil_moisture_source: 'Open-Meteo model estimate, top 1 cm',
+        rainfall_next_7_days_mm: (forecast.daily?.precipitation_sum || [])
+          .reduce((total, value) => total + (Number(value) || 0), 0)
+      }
+      setWeather(weatherData)
       setForm(prev => ({
         ...prev,
-        temperature: res.data.temperature,
-        humidity: res.data.humidity,
-        soil_moisture: res.data.soil_moisture_percent
+        temperature: weatherData.temperature,
+        humidity: weatherData.humidity,
+        soil_moisture: weatherData.soil_moisture_percent
       }))
     } catch (err) {
-      setWeatherError(err.response?.data?.error || 'Could not fetch live weather')
+      setWeatherError(err.message || 'Could not fetch live weather. Check your internet connection and try again.')
     } finally {
       setWeatherLoading(false)
     }
