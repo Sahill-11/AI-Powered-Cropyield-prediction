@@ -226,6 +226,36 @@
         "📊 Expected yield: ~2.56 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
       ],
       "created_at": "2026-11-03T16:21:37.525Z"
+    },
+    {
+      "id": "24901bf5-6e6b-4898-a72c-d2dbdff4766b",
+      "user_id": "aaf2a730-994e-44f8-aa1e-99c150b07cf8",
+      "crop": "Rice",
+      "state": "Madhya Pradesh",
+      "season": "Kharif",
+      "soil_type": "Loamy",
+      "temperature": 19.3,
+      "rainfall": 800,
+      "humidity": 70,
+      "soil_ph": 6.5,
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 40,
+      "fertilizer_kg_ha": 100,
+      "irrigation": 1,
+      "area_ha": 1,
+      "days_to_harvest": 120,
+      "soil_moisture": 34.7,
+      "weather_location": "Dewas, Madhya Pradesh",
+      "weather_observed_at": "2026-11-04T06:45",
+      "soil_moisture_source": "Open-Meteo model estimate, top 1 cm",
+      "predicted_yield": 3.12,
+      "total_production": 3.12,
+      "optimization_tips": [
+        "🌡️ Temperature (19.3°C) is low for Rice. Prefer sowing in 24–32°C window or use early varieties.",
+        "📊 Expected yield: ~3.12 t/ha. With optimized irrigation + balanced fertilizer, potential improvement: 10–25%."
+      ],
+      "created_at": "2026-11-04T01:26:28.182Z"
     }
   ]
 }
